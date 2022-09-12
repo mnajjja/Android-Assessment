@@ -18,7 +18,6 @@ class MainFragment : Fragment() {
 
     private val viewModel: MainViewModel by viewModels()
     private lateinit var binding: FragmentMainBinding
-    private val imagesAdapter by lazy { ImagesAdapter() }
 
 
     override fun onCreateView(
@@ -31,17 +30,5 @@ class MainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.imagesRecyclerView.apply {
-            layoutManager = LinearLayoutManager(context, VERTICAL, false)
-            adapter = imagesAdapter
-        }
-        bindView()
-    }
-
-    private fun bindView() {
-        viewModel.imageUrlStrings
-        viewModel.imageUrlStrings.observe(viewLifecycleOwner) {
-            imagesAdapter.submitList(it.toMutableList())
-        }
     }
 }
