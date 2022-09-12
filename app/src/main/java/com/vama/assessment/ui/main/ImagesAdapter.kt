@@ -1,14 +1,19 @@
 package com.vama.assessment.ui.main
 
+import android.content.Context
+import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.vama.assessment.R
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.target.CustomTarget
+import com.bumptech.glide.request.transition.Transition
+import com.vama.assessment.ImageDownloader
 import com.vama.assessment.databinding.ImageItemBinding
 
-class ImagesAdapter(): ListAdapter<String, ImagesAdapter.ViewHolder>(DiffUtilCallback()){
+class ImagesAdapter(val context: Context): ListAdapter<String, ImagesAdapter.ViewHolder>(DiffUtilCallback()){
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -17,13 +22,13 @@ class ImagesAdapter(): ListAdapter<String, ImagesAdapter.ViewHolder>(DiffUtilCal
         return ViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) = holder.bind(getItem(position))
-
-
     inner class ViewHolder(private val binding: ImageItemBinding) : RecyclerView.ViewHolder(binding.root){
-        fun bind(image: String){
-//            Picasso.get().load(user.avatar).into(binding.userAvatar)
-//            binding.clickListener = listener
+        fun bind(imageUrl: String, newIndex: Int){
+            ImageDownloader.downloadImage(context, imageUrl) {
+                if (oldPosition == newIndex || oldPosition == -1) {
+                    binding.ivImage.setImageDrawable(it)
+                }
+            }
         }
     }
 
@@ -39,5 +44,9 @@ class ImagesAdapter(): ListAdapter<String, ImagesAdapter.ViewHolder>(DiffUtilCal
             }
             return false
         }
+    }
+
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        holder.bind(getItem(position), position)
     }
 }
