@@ -7,7 +7,7 @@ import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
 import java.lang.Error
 
-object ImageDownloader {
+object ImageLoader {
     fun downloadImage(context: Context, url: String, completionHandler: (Drawable?) -> Unit) {
         Glide.with(context)
             .load(url)

@@ -1,16 +1,12 @@
 package com.vama.assessment.ui.main
 
 import android.content.Context
-import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.target.CustomTarget
-import com.bumptech.glide.request.transition.Transition
-import com.vama.assessment.ImageDownloader
+import com.vama.assessment.ImageLoader
 import com.vama.assessment.databinding.ImageItemBinding
 
 class ImagesAdapter(val context: Context): ListAdapter<String, ImagesAdapter.ViewHolder>(DiffUtilCallback()){
@@ -24,7 +20,7 @@ class ImagesAdapter(val context: Context): ListAdapter<String, ImagesAdapter.Vie
 
     inner class ViewHolder(private val binding: ImageItemBinding) : RecyclerView.ViewHolder(binding.root){
         fun bind(imageUrl: String, newIndex: Int){
-            ImageDownloader.downloadImage(context, imageUrl) {
+            ImageLoader.downloadImage(context, imageUrl) {
                 if (oldPosition == newIndex || oldPosition == -1) {
                     binding.ivImage.setImageDrawable(it)
                 }
