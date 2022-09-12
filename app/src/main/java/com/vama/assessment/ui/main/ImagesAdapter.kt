@@ -6,10 +6,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.vama.assessment.ImageLoader
+import coil.load
 import com.vama.assessment.databinding.ImageItemBinding
 
-class ImagesAdapter(val context: Context): ListAdapter<String, ImagesAdapter.ViewHolder>(DiffUtilCallback()){
+class ImagesAdapter: ListAdapter<String, ImagesAdapter.ViewHolder>(DiffUtilCallback()){
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -20,11 +20,7 @@ class ImagesAdapter(val context: Context): ListAdapter<String, ImagesAdapter.Vie
 
     inner class ViewHolder(private val binding: ImageItemBinding) : RecyclerView.ViewHolder(binding.root){
         fun bind(imageUrl: String, newIndex: Int){
-            ImageLoader.downloadImage(context, imageUrl) {
-                if (oldPosition == newIndex || oldPosition == -1) {
-                    binding.ivImage.setImageDrawable(it)
-                }
-            }
+            binding.ivImage.load(imageUrl)
         }
     }
 
