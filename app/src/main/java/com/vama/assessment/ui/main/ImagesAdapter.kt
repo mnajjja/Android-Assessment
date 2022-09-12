@@ -19,7 +19,7 @@ class ImagesAdapter: ListAdapter<String, ImagesAdapter.ViewHolder>(DiffUtilCallb
     }
 
     inner class ViewHolder(private val binding: ImageItemBinding) : RecyclerView.ViewHolder(binding.root){
-        fun bind(imageUrl: String, newIndex: Int){
+        fun bind(imageUrl: String){
             binding.ivImage.load(imageUrl)
         }
     }
@@ -39,6 +39,6 @@ class ImagesAdapter: ListAdapter<String, ImagesAdapter.ViewHolder>(DiffUtilCallb
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(getItem(position), position)
+        holder.bind(getItem(position))
     }
 }
