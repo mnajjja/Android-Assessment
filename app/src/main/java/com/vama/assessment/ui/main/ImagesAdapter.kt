@@ -1,12 +1,10 @@
 package com.vama.assessment.ui.main
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import coil.load
 import com.vama.assessment.databinding.ImageItemBinding
 
 class ImagesAdapter: ListAdapter<String, ImagesAdapter.ViewHolder>(DiffUtilCallback()){
